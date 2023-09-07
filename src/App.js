@@ -7,7 +7,11 @@ import Card from "./pages/Card";
 import Products from "./pages/Products";
 import NotFoun from "./pages/NotFoun";
 
+
 function App() {
+
+ // const {data,isLoading,error} = 
+
   return (
     <>
     <div className="App min-h-screen bg-gray-50 text-gray-700">
