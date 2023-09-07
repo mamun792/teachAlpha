@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
 html,
 body {
   overflow-x: hidden;
@@ -11,7 +14,10 @@ body {
 body {
   font-family: "Poppins", sans-serif;
 }
-
+/* utlities */
+.space-font {
+  font-family: "Space Grotesk", sans-serif;
+}
 .nav-link {
   position: relative;
 }
@@ -43,4 +49,25 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.slide-btn {
+  position: relative;
+}
+.slide-btn::before {
+  content: "";
+  width: 0%;
+
+  background-color: #f97316;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+}
+
+.slide-btn:hover::before {
+  width: 100%;
 }
