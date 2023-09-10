@@ -4,20 +4,19 @@ import { BsArrowLeft } from "react-icons/bs";
 import {
   addToCart,
   clearCart,
- 
   decreaseCart,
- 
   removeCart,
+  subTotal,
 } from "../features/products/cartSlice";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Card() {
   const dispatch = useDispatch();
-  const { cart: data } = useSelector((state) => state.cart);
+  const { cart: data, cartTotal } = useSelector((state) => state.cart);
 
   const removeHandler = (product) => {
     dispatch(removeCart(product));
-    console.log(product);
   };
 
   const clearCartHandelar = () => {
@@ -25,18 +24,23 @@ export default function Card() {
   };
 
   const deceasedHandler = (product) => {
-    
-    dispatch(decreaseCart(product))
+    dispatch(decreaseCart(product));
   };
 
   const inceasedHandler = (product) => {
     dispatch(addToCart(product));
   };
 
+  useEffect(() => {
+    dispatch(subTotal());
+  },[data,dispatch]);
+
   return (
     <div className="cart-section container mx-auto py-10">
       <h2 className="section-title uppercase text-2xl font-bold space-font text-center mb-10">
-        Your Card
+        {data?.length > 0
+          ? `Your have added ${data?.length} item${data?.length > 1 ? "s" : ""}`
+          : " Your Card Empty"}
       </h2>
 
       <div className="cart-container ">
@@ -49,7 +53,10 @@ export default function Card() {
         </div>
         <div className="texts flex flex-col ">
           {data.map((product) => (
-            <div className="cart-item grid grid-cols-5 gap-5 pb-5 border-b mt-10">
+            <div
+              key={product.id}
+              className="cart-item grid grid-cols-5 gap-5 pb-5 border-b mt-10"
+            >
               <div className="col-product flex col-span-2 gap-5">
                 <div className="product-image ">
                   <img
@@ -88,7 +95,9 @@ export default function Card() {
                   +
                 </button>
               </div>
-              <div className="col-total-price ml-auto">{product.price}</div>
+              <div className="col-total-price ml-auto">
+                {CurrentFormetter(product.price * product.quantity)}
+              </div>
             </div>
           ))}
         </div>
@@ -103,7 +112,9 @@ export default function Card() {
         <div className="flex flex-col items-start gap-2 ">
           <div className="top flex justify-between w-full text-2xl font-medium">
             <span className="total text-sky-500">Subtotal</span>
-            <span className="total-price text-rose-500">$1,000.00</span>
+            <span className="total-price text-rose-500">
+              {CurrentFormetter(cartTotal)}
+            </span>
           </div>
           <p className="text-gray-500">
             Taxes and shipping calculated at checkout
