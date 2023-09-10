@@ -10,7 +10,7 @@ export default function Hedar() {
 
   return (
     <div className="nav-bg  bg-violet-600 text-violet-50 h-20 flex justify-center items-center">
-      <div className="navbar container mx-auto flex justify-between items-center">
+      <div className="navbar container mx-auto  flex justify-between items-center  md:flex-row sm:flex-col lg:flex-row xs:flex-row">
         <div className="nav-left">
           <div className="logo">
             <span className="logo-text text-xl font-semibold">

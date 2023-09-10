@@ -68,37 +68,37 @@ export default function Slider() {
 
   return (
     <div className="frame relative">
+    <div
+      className="slider relative"
+      style={{ transform: `translateX(-${100 * slideIndex}vw )` }}
+    >
+      {data.map((item) => (
+        <Slide item={item} key={item.id} />
+      ))}
+    </div>
+    <div className="btns absolute z-10 text-white text-2xl flex gap-10 bottom-20 w-screen justify-center">
       <div
-        className="slider relative"
-        style={{ transform: `translateX(-${100 * slideIndex}vw )` }}
+        onClick={prevSlide}
+        className="btn-prev h-12 w-20 flex items-center justify-center bg-violet-900 text-violet-200 border-2 border-violet-200 hover:bg-gray-900 hover:text-gray-100 duration-300"
       >
-        {data.map((item) => (
-          <Slide item={item} key={item.id} />
-        ))}
-        
+        <button>
+          <span>
+            <BsArrowLeft />
+          </span>
+        </button>
       </div>
-      <div className="btns absolute z-[1] text-white text-2xl flex gap-10 bottom-20 w-screen justify-center">
-        <div
-          onClick={prevSlide}
-          className="btn-prev h-12 w-20 flex items-center justify-center bg-violet-900 text-violet-200 border-2 border-violet-200  hover:bg-gray-900 hover:text-gray-100  duration-300"
-        >
-          <button>
-            <span>
-              <BsArrowLeft />
-            </span>
-          </button>
-        </div>
-        <div
-          onClick={nextSlide}
-          className="btn-next h-12 w-20  flex justify-center items-center  bg-violet-900 text-violet-200 border-2 border-violet-200 hover:bg-gray-900 hover:text-gray-100 duration-300"
-        >
-          <button>
-            <span>
-              <BsArrowRight />
-            </span>
-          </button>
-        </div>
+      <div
+        onClick={nextSlide}
+        className="btn-next h-12 w-20 flex justify-center items-center bg-violet-900 text-violet-200 border-2 border-violet-200 hover:bg-gray-900 hover:text-gray-100 duration-300"
+      >
+        <button>
+          <span>
+            <BsArrowRight />
+          </span>
+        </button>
       </div>
     </div>
+  </div>
+  
   );
 }
