@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const initialState = {
   cart: localStorage.getItem("cart")
@@ -19,8 +20,30 @@ export const cartSlice = createSlice({
       );
       if (exitingProduct >= 0) {
         state.cart[exitingProduct].quantity++;
+
+        //totast 
+        toast.info('🦄 Quantity increase!', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
       } else {
         state.cart.push({ ...product, quantity: 1 });
+        toast.success('🦄 Added Product!', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
       }
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },
@@ -31,12 +54,33 @@ export const cartSlice = createSlice({
       );
       state.cart = updateCart;
       localStorage.setItem("cart", JSON.stringify(state.cart));
+
+      toast.warn('🦄 Remove Cart!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     },
 
     clearCart(state, action) {
       state.cart = [];
       //update local storage
       localStorage.setItem("cart", JSON.stringify(state.cart));
+      toast.warn('🦄 Remove Cart!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     },
 
     decreaseCart(state, action) {
@@ -56,29 +100,40 @@ export const cartSlice = createSlice({
 
       // Update local storage
       localStorage.setItem("cart", JSON.stringify(state.cart));
+
+      toast.info('🦄 Quantity decrease!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     },
 
     subTotal(state, action) {
-        const { total, quantity } = state.cart.reduce(
-            (cartTotal, cartItem) => {
-            const { price, quantity } = cartItem;
-            const itemTotal = price * quantity;
-            cartTotal.total += itemTotal;
-            cartTotal.quantity += quantity;
-            return cartTotal;
-            },
-            {
-            total: 0,
-            quantity: 0,
-            }
-        );
-        state.cartTotal = total;
-        state.quantity = quantity;
-    }
+      const { total, quantity } = state.cart.reduce(
+        (cartTotal, cartItem) => {
+          const { price, quantity } = cartItem;
+          const itemTotal = price * quantity;
+          cartTotal.total += itemTotal;
+          cartTotal.quantity += quantity;
+          return cartTotal;
+        },
+        {
+          total: 0,
+          quantity: 0,
+        }
+      );
+      state.cartTotal = total;
+      state.quantity = quantity;
+    },
   },
 });
 
-export const { addToCart, removeCart, clearCart, decreaseCart,subTotal } =
+export const { addToCart, removeCart, clearCart, decreaseCart, subTotal } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

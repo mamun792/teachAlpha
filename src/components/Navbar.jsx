@@ -25,7 +25,7 @@ export default function Hedar() {
           <NavLink to="/products" className="nav-link   duration-500">
             Products
           </NavLink>
-          <NavLink to="/card" >
+          <NavLink to="/cart" >
             <span className="cart-icon relative">
               <BsCartPlus />
               <span className="cart-count absolute -top-3  -right-3 text-xs bg-orange-500 h-5 w-5 rounded-full flex items-center justify-center font-medium">
