@@ -36,6 +36,10 @@ export default function Products() {
         {data.map((product) => (
           <Cart key={product.id} product={product} />
         ))}
+  
+ 
+
+
       </div>
     </div>
   );
